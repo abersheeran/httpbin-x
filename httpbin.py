@@ -26,7 +26,9 @@ async def anything(request: Request) -> JSONResponse:
         {
             "method": request.method,
             "urlpath": request.url.path,
+            "query_params": request.query_params,
             "headers": dict(request.headers),
+            "cookies": request.cookies,
             "form": form,
             "json": json,
             "content": content,
