@@ -1,4 +1,6 @@
-from baize.asgi import request_response, Request, JSONResponse
+import traceback
+
+from baize.asgi import request_response, Request, JSONResponse, PlainTextResponse
 from baize.exceptions import HTTPException
 
 
@@ -8,11 +10,15 @@ async def anything(request: Request) -> JSONResponse:
         form = list((await request.form).multi_items())
     except HTTPException:
         form = {}
+    except BaseException:
+        return PlainTextResponse(traceback.format_exc(), 500)
 
     try:
         json = await request.json
     except HTTPException:
         json = {}
+    except BaseException:
+        return PlainTextResponse(traceback.format_exc(), 500)
 
     try:
         if not (form or json):
