@@ -15,6 +15,7 @@ async def catch_exception(request: Request, next_call: Callable[[Request], Await
 
 
 @request_response
+@catch_exception
 async def anything(request: Request) -> JSONResponse:
     try:
         form = [
