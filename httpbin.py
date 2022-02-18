@@ -9,7 +9,7 @@ from baize.exceptions import HTTPException
 @middleware
 async def catch_exception(request: Request, next_call: Callable[[Request], Awaitable[Response]]) -> Response:
     try:
-        response = await next_call(request)
+        return await next_call(request)
     except BaseException:
         return PlainTextResponse(traceback.format_exc(), 500)
 
