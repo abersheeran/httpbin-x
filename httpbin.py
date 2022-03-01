@@ -44,6 +44,7 @@ async def anything(request: Request) -> JSONResponse:
 
     return JSONResponse(
         {
+            "client": tuple(request.client),
             "method": request.method,
             "urlpath": request.url.path,
             "query_params": list(request.query_params.multi_items()),
